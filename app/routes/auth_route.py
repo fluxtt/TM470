@@ -31,7 +31,7 @@ def login():
                 session['username'] = user['username']
                 session['role'] = user['role']
                 
-                return redirect(url_for('home'))
+                return redirect(url_for('inventory.dashboard'))
             
         flash('Invalid username or password', 'danger')
         

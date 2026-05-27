@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <h2>Inventory Dashboard</h2>
+        <div>
+            Logged in as: {{ session.username }}
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="#" class="button">
+            + Add Item
+        </a>
+        <div class="card-container">
+            <div class="card">
+                <h3>Total Items</h3>
+                <p>{{ items|length }}</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Unit</th>
+                    <th>Quantity</th>
+                    <th>Reorder Level</th>
+                    <th>Last Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.unit }}</td>
+
+                    <td>
+                        {% if item.quantity <= item.reorder_level %}
+                            <span class="low-stock">{{ item.quantity }}</span>
+                        {% else %}
+                            {{ item.quantity }}
+                        {% endif %}
+                    </td>
+                    <td>{{ item.reorder_level }}</td>
+                    <td>{{ item.updated_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
