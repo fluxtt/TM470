@@ -1,6 +1,6 @@
 from flask import Flask
 from app.routes.auth_route import auth_bp
-from app.routes.dashboard_route import inventory_bp
+from app.routes.inventory_routes import inventory_bp
 
 def create_app():
     app = Flask(__name__)
