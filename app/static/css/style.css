@@ -20,6 +20,21 @@ body {
 	align-items: center;
 }
 
+.nav-left {
+	display: flex;
+	gap: 20px;
+}
+
+.nav-left a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.nav-left a:hover {
+	text-decoration: underline;
+}
+
 /* =========================
    CONTAINERS
 ========================= */
@@ -103,11 +118,13 @@ th {
 .button {
 	display: inline-block;
 	padding: 10px 15px;
-	background: #333;
+	background: #00468c;
 	color: #fff;
+	font-weight: bold;
 	text-decoration: none;
 	border-radius: 5px;
-	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 /* =========================

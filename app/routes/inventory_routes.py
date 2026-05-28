@@ -89,3 +89,49 @@ def add_transaction():
     flash("Transaction recorded successfully.", "success")
     return redirect(url_for('inventory.dashboard'))
     
+@inventory_bp.route('/transactions')
+def transaction_history():
+    
+    if "user_id" not in session:
+        return redirect(url_for('auth.login'))
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    query = """
+    SELECT
+        transactions.id,
+        items.item_name,
+        users.username,
+        transactions.transaction_type,
+        transactions.quantity,
+        transactions.note,
+        transactions.created_at
+        
+    FROM transactions
+    
+    JOIN items
+        ON transactions.item_id = items.id
+        
+    JOIN users
+        ON transactions.user_id = users.id
+        
+    ORDER BY transactions.created_at DESC    
+    """
+
+    cursor.execute(query)
+    
+    transactions = cursor.fetchall()
+    
+    # Needed for transacton modal dropdown
+    cursor.execute("SELECT * FROM items ORDER BY item_name ASC")
+    items = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+    
+    return render_template(
+        "transactions.html",
+        transactions=transactions,
+        items=items
+    )

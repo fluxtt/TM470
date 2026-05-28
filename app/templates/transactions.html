@@ -8,9 +8,9 @@
 			type="text/css"
 			href="{{ url_for('static', filename='css/style.css') }}" />
 		<script src="{{ url_for('static', filename='js/transactionModal.js')}}"></script>
-		<title>Dashboard</title>
-	</head>
 
+		<title>Transaction History</title>
+	</head>
 	<body>
 		<!-- NAVBAR -->
 		<div class="navbar">
@@ -27,46 +27,34 @@
 			</div>
 		</div>
 
+		<!-- CONTENT -->
 		<div class="container">
 			{% with messages = get_flashed_messages(with_categories=true) %} {% if
 			messages %} {% for category, message in messages %}
 			<div class="flash-message {{ category }}">{{ message }}</div>
 			{% endfor %} {% endif %} {% endwith %}
 
-			<div class="card-container">
-				<div class="card">
-					<h3>Total Items</h3>
-					<p>{{ items|length }}</p>
-				</div>
-			</div>
-
+			<h2>Transaction History</h2>
 			<table>
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Item Name</th>
-						<th>Description</th>
-						<th>Unit</th>
+						<th>Item</th>
 						<th>Quantity</th>
-						<th>Reorder Level</th>
-						<th>Last Update</th>
+						<th>Type</th>
+						<th>Note</th>
+						<th>User</th>
+						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for item in items %}
+					{% for transaction in transactions %}
 					<tr>
-						<td>{{ item.id }}</td>
-						<td>{{ item.item_name }}</td>
-						<td>{{ item.description }}</td>
-						<td>{{ item.unit }}</td>
-
-						<td>
-							{% if item.quantity <= item.reorder_level %}
-							<span class="low-stock">{{ item.quantity }}</span>
-							{% else %} {{ item.quantity }} {% endif %}
-						</td>
-						<td>{{ item.reorder_level }}</td>
-						<td>{{ item.updated_at }}</td>
+						<td>{{ transaction.item_name }}</td>
+						<td>{{ transaction.quantity }}</td>
+						<td>{{ transaction.transaction_type }}</td>
+						<td>{{ transaction.note }}</td>
+						<td>{{ transaction.username }}</td>
+						<td>{{ transaction.created_at }}</td>
 					</tr>
 					{% endfor %}
 				</tbody>
