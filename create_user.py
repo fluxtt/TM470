@@ -1,8 +1,8 @@
 from app.database.db import get_db_connection
 import bcrypt
 
-username = "testuser"
-password = "testpassword"
+username = "shop_staff"
+password = "password123"
 
 hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
@@ -21,7 +21,7 @@ VALUES (%s, %s, %s)
 values = (
     username,
     hashed_password,
-    'test role'
+    'staff'
 )
 
 cursor.execute(query, values)
