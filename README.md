@@ -1,5 +1,5 @@
 # TM470
-Design and evaluation of a database-driven inventory management system for small businesses to track stock levels, validate inventory records, and generate restocking reports.
+The aim of this project is to design, implement and evaluate a relational database-driven inventory-management prototype that supports accurate stock recording, enforces data validation and provides low-stock reporting capabilities for a small independent hardware shop.
 
 ## Core Features
 - Product database
